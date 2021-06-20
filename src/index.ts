@@ -12,7 +12,7 @@ interface ITodos {
   id: string,
 }
 
-const todos: ITodos[] = [];
+var todos: ITodos[] = [];
 
 
 app.post("/todo", (request: Request, response: Response) => {
@@ -46,6 +46,25 @@ app.get("/todo/:id", (request: Request, response: Response) => {
   }
 
   return response.status(200).json(todo);
+})
+
+app.patch("/todo/:id", (request: Request, response: Response) => {
+  const { id } = request.params;
+  const todo = todos.find((todo) => todo.id === id);
+
+  if (!todo) {
+    return response.status(400).json({error: "Todo doesn't exists!"})
+  }
+  todo.done = true;
+  return response.status(200).json(todo);
+})
+
+app.delete("/todo", (request: Request, response: Response) => {
+  const doneTodos = todos.filter((todo) => todo.done == true);
+
+  doneTodos.forEach((doneTodo) => todos.splice(todos.findIndex((todo) => todo.id === doneTodo.id)))
+
+  return response.status(200).json({doneTodos});
 })
 
 app.delete("/todo/:id", (request: Request, response: Response) => {
