@@ -54,11 +54,14 @@ app.get("/todo/:id", (request: Request, response: Response) => {
 app.patch("/todo/:id", (request: Request, response: Response) => {
   const { id } = request.params;
   const todo = todos.find((todo) => todo.id === id);
+  const { done } = request.body
 
   if (!todo) {
     return response.status(400).json({error: "Todo doesn't exists!"})
   }
-  todo.done = true;
+
+  todo.done = done;
+
   return response.status(200).json(todo);
 })
 
