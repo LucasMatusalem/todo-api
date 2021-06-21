@@ -60,11 +60,9 @@ app.patch("/todo/:id", (request: Request, response: Response) => {
 })
 
 app.delete("/todo", (request: Request, response: Response) => {
-  const doneTodos = todos.filter((todo) => todo.done == true);
+  todos = todos.filter((todo) => todo.done == false);
 
-  doneTodos.forEach((doneTodo) => todos.splice(todos.findIndex((todo) => todo.id === doneTodo.id)))
-
-  return response.status(200).json({doneTodos});
+  return response.status(200).json({message: "Done todos deleted"});
 })
 
 app.delete("/todo/:id", (request: Request, response: Response) => {
