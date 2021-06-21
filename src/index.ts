@@ -1,8 +1,11 @@
 import express from "express";
 import { Request, Response } from "express";
 import { v4 as uuidV4 } from "uuid";
+import cors from 'cors'
 
 const app = express();
+
+app.use(cors())
 
 app.use(express.json());
 
