@@ -60,7 +60,7 @@ app.patch("/todo/:id", (request: Request, response: Response) => {
 })
 
 app.delete("/todo", (request: Request, response: Response) => {
-  todos = todos.filter((todo) => todo.done == false);
+  todos = todos.filter((todo) => todo.done === false);
 
   return response.status(200).json({message: "Done todos deleted"});
 })
