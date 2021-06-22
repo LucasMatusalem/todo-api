@@ -1,11 +1,10 @@
-import express from "express";
-import { Request, Response } from "express";
-import { v4 as uuidV4 } from "uuid";
-import cors from 'cors'
+import cors from 'cors';
+import express, { Request, Response } from 'express';
+import { v4 as uuidV4 } from 'uuid';
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 app.use(express.json());
 
@@ -15,72 +14,69 @@ interface ITodos {
   id: string,
 }
 
-var todos: ITodos[] = [];
+let todos: ITodos[] = [];
 
-
-app.post("/todo", (request: Request, response: Response) => {
+app.post('/todo', (request: Request, response: Response) => {
   const { name } = request.body;
 
   if (!name) {
-    return response.status(400).json({error: "You need to choose a name for your todo!"})
+    return response.status(400).json({ error: 'You need to choose a name for your todo!' });
   }
 
   const todo: ITodos = {
     name,
     done: false,
     id: uuidV4(),
-  }
+  };
 
   todos.push(todo);
 
   return response.status(201).json(todo);
-})
+});
 
-app.get("/todo", (request: Request, response: Response) => {
-  return response.status(200).json(todos);
-})
+app.get('/todo', (request: Request, response: Response) => response.status(200).json(todos));
 
-app.get("/todo/:id", (request: Request, response: Response) => {
+app.get('/todo/:id', (request: Request, response: Response) => {
   const { id } = request.params;
   const todo = todos.find((todo) => todo.id === id);
 
   if (!todo) {
-    return response.status(400).json({error: "Todo doesn't exists!"})
+    return response.status(400).json({ error: "Todo doesn't exists!" });
   }
 
   return response.status(200).json(todo);
-})
+});
 
-app.patch("/todo/:id", (request: Request, response: Response) => {
+app.patch('/todo/:id', (request: Request, response: Response) => {
   const { id } = request.params;
   const todo = todos.find((todo) => todo.id === id);
-  const { done } = request.body
+  const { done } = request.body;
 
   if (!todo) {
-    return response.status(400).json({error: "Todo doesn't exists!"})
+    return response.status(400).json({ error: "Todo doesn't exists!" });
   }
 
   todo.done = done;
 
   return response.status(200).json(todo);
-})
+});
 
-app.delete("/todo", (request: Request, response: Response) => {
+app.delete('/todo', (request: Request, response: Response) => {
   todos = todos.filter((todo) => todo.done === false);
 
-  return response.status(200).json({message: "Done todos deleted"});
-})
+  return response.status(200).json({ message: 'Done todos deleted' });
+});
 
-app.delete("/todo/:id", (request: Request, response: Response) => {
+app.delete('/todo/:id', (request: Request, response: Response) => {
   const { id } = request.params;
   const todoIndex = todos.findIndex((todo) => todo.id === id);
 
   if (todoIndex === -1) {
-    return response.status(400).json({error: "Todo doesn't exists!"})
+    return response.status(400).json({ error: "Todo doesn't exists!" });
   }
   todos.splice(todoIndex, 1);
 
   return response.status(200).json();
-})
+});
 
 export { app };
