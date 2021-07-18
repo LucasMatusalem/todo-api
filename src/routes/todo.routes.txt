@@ -1,36 +1,13 @@
 import { Router } from "express";
+import { TodosRepository } from "modules/todos/repositories/TodosRepository";
 import { v4 as uuidV4 } from "uuid";
 // import controllers
 
 const todoRoutes = Router();
 
-interface ITodos {
-  name: string;
-  done: boolean;
-  id: string;
-}
+const todos = new TodosRepository();
 
-let todos: ITodos[] = [];
-
-todoRoutes.post("/", (request, response) => {
-  const { name } = request.body;
-
-  if (!name) {
-    return response
-      .status(400)
-      .json({ error: "You need to choose a name for your todo!" });
-  }
-
-  const todo: ITodos = {
-    name,
-    done: false,
-    id: uuidV4(),
-  };
-
-  todos.push(todo);
-
-  return response.status(201).json(todo);
-});
+todoRoutes.post("/", (request, response) => {});
 
 todoRoutes.get("/", (request, response) => {
   response.status(200).json(todos);

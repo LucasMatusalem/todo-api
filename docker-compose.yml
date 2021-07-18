@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  database:
+    image: postgres
+    container_name: db-todo-with-tusa
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=tusadev
+      - POSTGRES_PASSWORD=vedasut
+      - POSTGRES_DB=todo-with-tusa
+    volumes:
+      - pgdata:/data/postgres
+
+volumes:
+  pgdata:
+    driver: local
