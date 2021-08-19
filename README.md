@@ -1,7 +1,8 @@
 <h1 align="center">TODO-APP</h1>
 
 <p align="center">
-  <img alt="Happy" src=".github/preview.png" width="100%">
+  <img alt="PreviewBackend" src=".github/preview.png" width="100%">
+  <img alt="PreviewFrontend" src=".github/previewfrontend.png" width="100%">
 </p>
 
 ## ✨ Tecnologias
