@@ -17,10 +17,6 @@ O backend deste projeto foi desenvolvido com as seguintes tecnologias:
 O Todo-app é uma aplicação web para organização de tarefas (todo-list), no qual desenvolvi a api responsável pelo backend. O projeto pode ser acessado aqui:
 - [TODO-APP](https://todo-app-inacio-tusa.vercel.app/)
 
-## 🔶 Diagrama
-
-<img src="public/diagrama.png" alt="Diagrama da aplicação" />
-
 ## 🚀 Como executar
 
 - Clone o repositório
